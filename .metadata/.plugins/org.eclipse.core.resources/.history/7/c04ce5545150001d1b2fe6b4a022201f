@@ -1,0 +1,11 @@
+package vo;
+
+import java.util.Date;
+
+public class BookVO {
+	private int bookId;
+	private String title;
+	private String category;
+	private int price;
+	private Datete insertDate;
+}
