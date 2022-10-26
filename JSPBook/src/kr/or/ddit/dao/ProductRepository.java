@@ -3,12 +3,12 @@ package kr.or.ddit.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.or.ddit.dto.Product;
+import kr.or.ddit.dto.ProductVO;
 
 public class ProductRepository {
 	//상품 목록 저장할 리스트 작성(전역변수)
-	private List<Product> listOfProducts = 
-			new ArrayList<Product>();
+	private List<ProductVO> listOfProducts = 
+			new ArrayList<ProductVO>();
 	
 	//싱글톤 객체
 	private static ProductRepository instance = new ProductRepository();
@@ -19,7 +19,7 @@ public class ProductRepository {
 	//그런 후  Product 객체 타입의 List인 listOfProducts 변수에 저장 
 	public ProductRepository() {
 		//생성자(상품 아이디, 상품 명, 상품 가격 초기화)
-		Product phone = new Product("P1234","iPhone 6s", 800000);
+		ProductVO phone = new ProductVO("P1234","iPhone 6s", 800000);
 		//상품 설명
 		phone.setDescription("4.7-inch, 1334x750 Renina HD display."
 				+ "8-megapixel iSight Camera");
@@ -38,7 +38,7 @@ public class ProductRepository {
 		
 		//-------------------------------노트북 등록 시작--------------------------------
 		//생성자(상품 아이디, 상품 명, 상품 가격 초기화)
-		Product notebook = new Product("P1235","LG PC 그램", 1500000);
+		ProductVO notebook = new ProductVO("P1235","LG PC 그램", 1500000);
 		//상품 설명
 		notebook.setDescription("13.3-inch, IPS LED display, 5rd Generation"
 				+ "Intel Core processors");
@@ -56,7 +56,7 @@ public class ProductRepository {
 		
 		//-------------------------------태블릿 등록 시작--------------------------------
 		//생성자(상품 아이디, 상품 명, 상품 가격 초기화)
-		Product tablet = new Product("P1236","Galaxy Tab S", 900000);
+		ProductVO tablet = new ProductVO("P1236","Galaxy Tab S", 900000);
 		//상품 설명
 		tablet.setDescription("212.8*125.6*6.6m, Super AMOLED display, "
 				+ "Octa-Core processor");
@@ -78,7 +78,7 @@ public class ProductRepository {
 	
 	//Person 객체 타입의 변수 listOfProducts에 저장된 모든 상품 목록을 가져옴.
 	//상품 목록
-	public List<Product> getAllProducts(){
+	public List<ProductVO> getAllProducts(){
 		return listOfProducts;
 	}
 	
@@ -86,11 +86,11 @@ public class ProductRepository {
 	//listOfProducts 변수에 저장된 3개(이상)의 상품 목록 중 
 	//선택한 상품의 아이디와 일치하는 상품 정보를 가져오는 메소드
 	//List<Product> listOfProducts
-	public Product getProductById(String productId) {
-		Product productById = null;
+	public ProductVO getProductById(String productId) {
+		ProductVO productById = null;
 		
 		//상품 목록(listOfProducts) 반복
-		for(Product product : listOfProducts) {
+		for(ProductVO product : listOfProducts) {
 			if(product.getProductId().equals(productId)) {
 				productById = product;
 				break;
@@ -100,7 +100,7 @@ public class ProductRepository {
 		return productById;
 	}
 	//새로운 상품 등록(Product 타입의 파라미터를 Product 타입(dto, vo)의 매개변수로 받음)
-	public void addProduct(Product product) {
+	public void addProduct(ProductVO product) {
 		//기존의 상품목록에 추가
 		listOfProducts.add(product);
 	}

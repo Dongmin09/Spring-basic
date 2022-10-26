@@ -1,8 +1,9 @@
-<%@page import="kr.or.ddit.dto.Product"%>
+<%@page import="kr.or.ddit.dto.ProductVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="kr.or.ddit.dao.ProductRepository"%>
 <%@ page errorPage="exceptionNoProductId.jsp" %>
-<%//
+<%
+	//
 	//ProductRepository productDAO = new ProductRepository();
 	ProductRepository productDAO = ProductRepository.getInstance();
 %>
@@ -37,10 +38,11 @@
 			<h1 class="display-3">상품 정보</h1>
 		</div>
 	</div>
-	<%//스크립틀릿
-		//http://localhost/product.jsp?id=P1234의 요청파라미터를 받아보자..
-		String id = request.getParameter("id");	//P1234
-		Product product = productDAO.getProductById(id); //P1234
+	<%
+		//스크립틀릿
+			//http://localhost/product.jsp?id=P1234의 요청파라미터를 받아보자..
+			String id = request.getParameter("id");	//P1234
+			ProductVO product = productDAO.getProductById(id); //P1234
 	%>
 	<!-- 내용 -->
 	<div class="container">

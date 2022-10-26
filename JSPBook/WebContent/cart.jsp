@@ -1,5 +1,5 @@
 <%@page import="java.math.BigDecimal"%>
-<%@page import="kr.or.ddit.dto.Product"%>
+<%@page import="kr.or.ddit.dto.ProductVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
@@ -48,29 +48,30 @@
 					<th>상품</th><th>가격</th><th>수량</th>
 					<th>금액</th><th>비고</th>
 				</tr>
-				<%//스크립틀릿
-					//금액 누적하는 변수
-					double sum = 0;
-					//addCart.jsp의 session.setAttribute("cartlist", list);
-					ArrayList<Product> cartList 
-						= (ArrayList<Product>)session.getAttribute("cartlist");	//list : 장바구니{P1234상품,P1236상품}
-					
-//장바구니가 비었다면..
-if(cartList==null){
-%>
+				<%
+					//스크립틀릿
+							//금액 누적하는 변수
+							double sum = 0;
+							//addCart.jsp의 session.setAttribute("cartlist", list);
+							ArrayList<ProductVO> cartList 
+								= (ArrayList<ProductVO>)session.getAttribute("cartlist");	//list : 장바구니{P1234상품,P1236상품}
+							
+				//장바구니가 비었다면..
+				if(cartList==null){
+				%>
 					<tr style="text-align:center;">
 						<td colspan="5" style="text-align:center;">장바구니에 상품이 없습니다.</th>
 					</tr>
-<%					
-}else{
-					//상품 리스트 하나씩 꺼냄
-					for(Product product : cartList){
-						//금액 = 가격 * 수량
-						double total = product.getUnitPrice() * product.getQuantity();
-						BigDecimal totalBig = new BigDecimal(total);
-						//금액이 누적됨
-						sum = sum + total;
-				%>
+<%
+	}else{
+			//상품 리스트 하나씩 꺼냄
+			for(ProductVO product : cartList){
+				//금액 = 가격 * 수량
+				double total = product.getUnitPrice() * product.getQuantity();
+				BigDecimal totalBig = new BigDecimal(total);
+				//금액이 누적됨
+				sum = sum + total;
+%>
 				<tr>
 					<td><%=product.getProductId()%> - <%=product.getPname()%></td>
 					<td><%=product.getUnitPrice()%></td>

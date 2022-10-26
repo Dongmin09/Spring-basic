@@ -4,10 +4,10 @@
 <%@page import="java.util.List"%>
 <%@page import="org.apache.commons.fileupload.DiskFileUpload"%>
 <%@page import="kr.or.ddit.dao.ProductRepository"%>
-<%@page import="kr.or.ddit.dto.Product"%>
+<%@page import="kr.or.ddit.dto.ProductVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%
-request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 
 //이미지 파일업로드 처리
 String path = "D:\\A_TeachingMaterial\\08_Framework\\workspace\\JSPBook\\WebContent\\images";
@@ -44,36 +44,36 @@ while(params.hasNext()){	//다음 항목이 있는지?
 		//item : {productId=P1234}
 		String name = item.getFieldName();	//productId
 		if(name.equals("productId")){	
-			//P1234
-			productId    = item.getString("UTF-8");
+	//P1234
+	productId    = item.getString("UTF-8");
 		}else if(name.equals("pname")){
-			pname        = item.getString("UTF-8");
+	pname        = item.getString("UTF-8");
 		}else if(name.equals("unitPrice")){
-			unitPrice    = item.getString("UTF-8");	//문자
-			
-			//가격이 비어있다면..
-			if(unitPrice.isEmpty()){
-				price = 0d;
-			}else{//비어있지 않다면..
-				price = Double.parseDouble(unitPrice);
-			}
+	unitPrice    = item.getString("UTF-8");	//문자
+	
+	//가격이 비어있다면..
+	if(unitPrice.isEmpty()){
+		price = 0d;
+	}else{//비어있지 않다면..
+		price = Double.parseDouble(unitPrice);
+	}
 		}else if(name.equals("description")){
-			description  = item.getString("UTF-8");
+	description  = item.getString("UTF-8");
 		}else if(name.equals("manufacturer")){
-			manufacturer = item.getString("UTF-8");
+	manufacturer = item.getString("UTF-8");
 		}else if(name.equals("category")){
-			category     = item.getString("UTF-8");
+	category     = item.getString("UTF-8");
 		}else if(name.equals("unitsInStock")){
-			unitsInStock = item.getString("UTF-8");	//문자
-			
-			if(unitsInStock.isEmpty())
-				stock = 0;
-			else
-				out.print("여기1");
-				stock = Long.valueOf(unitsInStock);
-				out.print("여기2");
+	unitsInStock = item.getString("UTF-8");	//문자
+	
+	if(unitsInStock.isEmpty())
+		stock = 0;
+	else
+		out.print("여기1");
+		stock = Long.valueOf(unitsInStock);
+		out.print("여기2");
 		}else if(name.equals("condition")){
-			condition    = request.getParameter("condition");
+	condition    = request.getParameter("condition");
 		}
 
 	}else{	//파일객체일 때
@@ -93,7 +93,7 @@ while(params.hasNext()){	//다음 항목이 있는지?
 }
 
 //Product(dto) 객체 생성
-Product newProduct = new Product();
+ProductVO newProduct = new ProductVO();
 newProduct.setProductId(productId);
 newProduct.setPname(pname);
 newProduct.setUnitPrice(price);	//Integer를 double형으로 변경

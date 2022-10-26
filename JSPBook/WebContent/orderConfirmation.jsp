@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.math.BigDecimal"%>
-<%@page import="kr.or.ddit.dto.Product"%>
+<%@page import="kr.or.ddit.dto.ProductVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.net.URLDecoder"%>
-<%//스크립틀릿
+<%
+	//스크립틀릿
 	String Shipping_name = "";
 	String Shipping_zipCode = "";
 	String Shipping_country = "";
@@ -22,22 +23,22 @@
 		//쿠키 값 가져옴
 // 		out.print(URLDecoder.decode(thisCookie.getValue(),"UTF-8")+"<br />");
 		if(thisCookie.getName().equals("Shipping_name")){
-			Shipping_name = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
+	Shipping_name = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
 		}
 		if(thisCookie.getName().equals("Shipping_zipCode")){
-			Shipping_zipCode = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
+	Shipping_zipCode = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
 		}
 		if(thisCookie.getName().equals("Shipping_country")){
-			Shipping_country = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
+	Shipping_country = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
 		}
 		if(thisCookie.getName().equals("Shipping_addressName")){
-			Shipping_addressName = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
+	Shipping_addressName = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
 		}
 		if(thisCookie.getName().equals("Shipping_shippingDate")){
-			Shipping_shippingDate = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
+	Shipping_shippingDate = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
 		}
 		if(thisCookie.getName().equals("Shipping_cartId")){
-			Shipping_cartId = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
+	Shipping_cartId = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
 		}
 	}
 %>
@@ -85,19 +86,20 @@
 					<th class="text-center">가격</th>
 					<th class="text-center">소계</th>
 				</tr>
-				<%//스크립틀릿
-					double sum = 0;
-					//세션의 이름인 cartlist를 통해 Product타입의 상품목록 리스트를 가져와보자
-					ArrayList<Product> cartList = 
-						(ArrayList<Product>)session.getAttribute("cartlist");
-					//상품 목록을 하나씩 출력해보자
-					for(int i=0;i<cartList.size();i++){
-						Product product = cartList.get(i);
-						//얼마짜리를 몇 개 샀니? => 금액
-						double total = product.getUnitPrice() * product.getQuantity();
-						sum = sum + total;
-						
-						BigDecimal totalBig = new BigDecimal(total);
+				<%
+					//스크립틀릿
+							double sum = 0;
+							//세션의 이름인 cartlist를 통해 Product타입의 상품목록 리스트를 가져와보자
+							ArrayList<ProductVO> cartList = 
+								(ArrayList<ProductVO>)session.getAttribute("cartlist");
+							//상품 목록을 하나씩 출력해보자
+							for(int i=0;i<cartList.size();i++){
+								ProductVO product = cartList.get(i);
+								//얼마짜리를 몇 개 샀니? => 금액
+								double total = product.getUnitPrice() * product.getQuantity();
+								sum = sum + total;
+								
+								BigDecimal totalBig = new BigDecimal(total);
 				%>
 				<tr>
 					<td class="text-center"><em><%=product.getPname()%></em></td>

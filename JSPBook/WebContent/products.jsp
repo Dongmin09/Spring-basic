@@ -1,4 +1,4 @@
-<%@page import="kr.or.ddit.dto.Product"%>
+<%@page import="kr.or.ddit.dto.ProductVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.dao.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
@@ -32,9 +32,10 @@
 			<h1 class="display-3">상품 목록</h1>
 		</div>
 	</div>
-	<%//스크립트릿
-		//Person 객체 타입의 변수 listOfProducts에 저장된 모든 상품 목록을 가져옴.
-		List<Product> listOfProducts = productDAO.getAllProducts();
+	<%
+		//스크립트릿
+			//Person 객체 타입의 변수 listOfProducts에 저장된 모든 상품 목록을 가져옴.
+			List<ProductVO> listOfProducts = productDAO.getAllProducts();
 	%>
 	<!-- container : 이 안에 내용있다 -->
 	<div class="container">
@@ -42,11 +43,11 @@
 		<div class="row" align="center">
 			<%
 				//listOfProducts Product타입 리스트 변수
-				//[0]:{"P1234","iPhone 6s",800000}
-				//[1]:{"P1235","LG PC 그램", 1500000}
-				//[2]:{"P1236","Galaxy Tab S", 900000}
-				for(Product product : listOfProducts){
 					//[0]:{"P1234","iPhone 6s",800000}
+					//[1]:{"P1235","LG PC 그램", 1500000}
+					//[2]:{"P1236","Galaxy Tab S", 900000}
+					for(ProductVO product : listOfProducts){
+						//[0]:{"P1234","iPhone 6s",800000}
 			%>
 			<!-- 열별 처리 -->
 			<div class="col-md-4">
