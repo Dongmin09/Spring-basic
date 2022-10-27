@@ -1,7 +1,6 @@
 package kr.or.ddit.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.ddit.service.ProductService;
-import kr.or.ddit.vo.CartDetVO;
 import kr.or.ddit.vo.CartVO;
 import kr.or.ddit.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
@@ -291,7 +289,7 @@ public class ProductController {
 	//요청URI => /processShippingInfo
 	//요청파라미터 => 배송정보들
 	@RequestMapping(value="/processShippingInfo",method=RequestMethod.POST)
-	public String processShippingInfo(@ModelAttribute CartVO cartVO, Model model,
+	public String processShippingInfo(@ModelAttribute CartVO cartVO,
 			HttpServletResponse response) throws Exception {
 		//쿠키 쿠키 뉴~ 큐키 네임 밸류
 		//요청 파라미터 정보를 쿠키에 넣음 
@@ -334,8 +332,6 @@ public class ProductController {
 		response.addCookie(country);
 		response.addCookie(addressName);
 		response.addCookie(addressDetail);
-		
-		model.addAttribute("cartVO", cartVO);
 		//forwarding
 		return "product/orderConfirmation";
 	}
@@ -343,79 +339,7 @@ public class ProductController {
 	//배송 후 마무리. 세션 종료. 쿠키 종료. 
 	//요청URI : /thankCustomer
 	@RequestMapping(value="/thankCustomer", method=RequestMethod.GET)
-	public String thankCustomer(HttpServletRequest request,
-			CartVO cartVO) throws Exception {
-		// 1. 쿠키정보를 가져와 CART 테이블로 insert
-		String Shipping_name = "";
-		String Shipping_zipCode = "";
-		String Shipping_country = "";
-		String Shipping_addressName = "";
-		String Shipping_addressDetail = "";
-		String Shipping_shippingDate = "";
-		String Shipping_cartId = "";
-
-		Cookie[] cookies = request.getCookies();
-		//쿠키의 개수만큼 반복
-		for(int i=0;i<cookies.length;i++){
-			Cookie thisCookie = cookies[i];
-			//쿠키 이름 가져옴
-//	 		out.print(thisCookie.getName() + "<br />");
-			//쿠키 값 가져옴
-//	 		out.print(URLDecoder.decode(thisCookie.getValue(),"UTF-8")+"<br />");
-			if(thisCookie.getName().equals("Shipping_name")){
-				Shipping_name = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setName(Shipping_name);
-			}
-			if(thisCookie.getName().equals("Shipping_zipCode")){
-				Shipping_zipCode = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setZipCode(Shipping_zipCode);
-			}
-			if(thisCookie.getName().equals("Shipping_country")){
-				Shipping_country = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setCountry(Shipping_country);
-			}
-			if(thisCookie.getName().equals("Shipping_addressName")){
-				Shipping_addressName = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setAddressName(Shipping_addressName);
-			}
-			if(thisCookie.getName().equals("Shipping_shippingDate")){
-				Shipping_shippingDate = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setShippingDate(Shipping_shippingDate);
-			}
-			if(thisCookie.getName().equals("Shipping_cartId")){
-				Shipping_cartId = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setCartId(Shipping_cartId);
-			}
-			if(thisCookie.getName().equals("Shipping_addressDetail")){
-				Shipping_addressDetail = URLDecoder.decode(thisCookie.getValue(),"UTF-8");
-				cartVO.setAddressDetail(Shipping_addressDetail);
-			}
-		}
-		
-		log.info("cartVO : " + cartVO.toString());
-		// 2. 세션 정보를 가져와 CART_DET 테이블로 다중 insert
-		HttpSession session = request.getSession();
-		ArrayList<ProductVO> list = (ArrayList<ProductVO>)session.getAttribute("cartlist");
-		
-		//3. CartVO : CartDetVO = 1 : N
-		List<CartDetVO> cartDetVOList = new ArrayList<CartDetVO>();
-		for(ProductVO vo : list) {
-			
-			CartDetVO cartDetVO = new CartDetVO();
-			cartDetVO.setCartId(cartVO.getCartId());
-			cartDetVO.setProductId(vo.getProductId());
-			cartDetVO.setUnitPrice(vo.getUnitPrice());
-			cartDetVO.setQuantity(vo.getQuantity());
-			cartDetVO.setAmount(vo.getUnitPrice() * vo.getQuantity());
-			
-			cartDetVOList.add(cartDetVO);
-		}
-		
-		cartVO.setCartDetVOList(cartDetVOList);
-		
-		log.info("cartVO : " + cartVO.toString());
-		
-		this.productService.thankCustomer(cartVO);
+	public String thankCustomer() {
 		//forwarding
 		return "product/thankCustomer";
 	}

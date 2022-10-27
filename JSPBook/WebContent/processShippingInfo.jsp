@@ -1,5 +1,6 @@
-<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@page import="java.net.URLEncoder"%>
+
 <%//스크립틀릿
 	request.setCharacterEncoding("UTF-8");
 	//쿠키 쿠키 뉴~ 큐키 네임 밸류
