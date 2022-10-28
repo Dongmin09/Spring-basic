@@ -74,7 +74,7 @@ public class ProductController {
 		log.info("result : " + result);
 		
 		if(result > 0) {//입력 성공
-			mav.setViewName("redirect:/deltail?productId=" + productVO.getProductId());
+			mav.setViewName("redirect:/detail?productId=" + productVO.getProductId());
 		}else {//입력 실패
 			mav.setViewName("redirect:/addproduct");
 		}
