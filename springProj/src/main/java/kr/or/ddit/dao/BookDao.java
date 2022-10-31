@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.vo.AttachVO;
 import kr.or.ddit.vo.BookVO;
 
 // 매퍼 xml(book_SQL.xml)을 실행시키는
@@ -68,5 +69,10 @@ public class BookDao {
 	public int delete(int bookId) {
 		// .delete("namespace.id", 파라미터)
 		return this.sqlSessionTemplate.delete("book.delete", bookId);
+	}
+	
+	//ATTACH 테이블에 다중 insert
+	public int insertAttach(List<AttachVO> attachVOList) {
+		return this.sqlSessionTemplate.insert("book.insertAttach",attachVOList);
 	}
 }

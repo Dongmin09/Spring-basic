@@ -48,15 +48,26 @@ public class ProductDao {
 		return this.sqlSessionTemplate.delete("product.delete", productId);
 	}
 	
+	//CART 테이블에 insert
 	public int insertCart(CartVO cartVO) {
 		return this.sqlSessionTemplate.insert("product.insertCart",cartVO);
-		
 	}
 	
-	//ATTACH 테이블에 다중 INSERT
+	//ATTACH 테이블에 다중 insert
 	public int insertAttach(List<AttachVO> attachVOList) {
-		return this.sqlSessionTemplate.insert("product.insertAttach",attachVOList );
+		return this.sqlSessionTemplate.insert("product.insertAttach",attachVOList);
 	}
+	
+	// PRODUCT테이블의 기본키 자동 생성
+	public String getProductId() {
+		//1행 select, 파라미터 없음
+		return this.sqlSessionTemplate.selectOne("product.getProductId");
+	}
+	
+	//ATTACH 테이블에 다중 insert
+	public int insertAttach(List<AttachVO> attachVOList);
+
+
 }
 
 

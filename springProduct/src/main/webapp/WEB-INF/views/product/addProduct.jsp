@@ -8,57 +8,67 @@
 <title>상품 등록</title>
 <style type="text/css">
 	.imgs_wrap{
-		width : 300px;
-		margin-top : 50px;
+		width:300px;
+		margin-top:50px;
 	}
 	.imgs_wrap img{
-		max-width: 100%;
+		max-width:100%;
 	}
 </style>
 <script type="text/javascript" src="/resources/js/validation.js"></script>
 <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	// 이미지 미리보기 시작///
+	//이미지 미리보기 시작////////////////////////
 	let sel_file = [];
 	
-	//mutiple
+	//input type="file" id="productImage" name="productImage" class="form-control"
+	//multiple
 	$("#productImage").on("change",handleImgFileSelect);
-	// 파라미터 e : onchange 이벤트 객체
+	//파라미터 e : onchange 이벤트 객체
 	function handleImgFileSelect(e){
-		// 이벤트가 발생된 타켓 안에
+		//이벤트가 발생된 타겟 안에 이미지 파일들을 가져와보자 
 		let files = e.target.files;
-		//이미지가 여러개가 있을 수 잇으므로 이미지를 분리하여 배열로 만듬
+		//이미지가 여러개가 있을 수 있으므로 이미지를 분리하여 배열로 만듦
 		let fileArr = Array.prototype.slice.call(files);
-		// 파일 타입의 배열 반복, f: 파일 배열안에 들어있는 각각의 이미지 파일 객체
+		//파일 타입의 배열 반복. f : 파일 배열 안에 들어있는 각각의 이미지 파일 객체
 		fileArr.forEach(function(f){
-			// 이미지파일의 아닌 경우 이미지 미리보기 실패로 처리
+			//이미지 파일이 아닌 경우 이미지 미리보기 실패로 처리
 			if(!f.type.match("image.*")){
 				alert("이미지 확장자만 가능합니다.");
-				// 함수를 종료
+				//함수를 종료
 				return;
 			}
-			// 이미지 객체를 (f) 전역배열타입의 변수(sel_file)에 넣자
+			//이미지 객체를(f) 전역 배열타입 변수(sel_file)에 넣자
 			sel_file.push(f);
-			// 이미지 객체를 읽을 자바스크립트의 reader 객체 생성
+			//이미지 객체를 읽을 자바스크립트의 reader 객체 생성
 			let reader = new FileReader();
-			// e : reader가 이미지 객체를 읽는 이벤트
+			//e : reader가 이미지 객체를 읽는 이벤트
 			reader.onload = function(e){
-				//e.target : 이미지  객체
+				//e.target : 이미지 객체
 				//e.target.result : reader가 이미지를 다 읽은 결과
-				let img_html = "<img src=\"" + e.target.result + "\" />";
-				// div 사이에 이미지가 렌더링되어 화면에 보임
-				// 객체.append : 누적, .html : 새로 고침, innerHTML : J/S
+				let img_html = "<img src=\"" + e.target.result + "\"  />";
+				//div 사이에 이미지가 렌더링되어 화면에 보임
+				//객체.append : 누적, .html : 새로고침, innerHTML : J/S
 				$(".imgs_wrap").append(img_html);
 			}
-			// f : 이미지 파일 객체를 읽은 후 다음 이미지 파일 (f)를 위해 초기화
+			//f : 이미지 파일 객체를 읽은 후 다음 이미지 파일(f)을 위해 초기화
 			reader.readAsDataURL(f);
-			
-			
-		});
+		});//end forEach
 	}
-
-	// 이미지 미리보기 끝
+	//이미지 미리보기 끝////////////////////////
+	//아작낫어유.. 피시다타써
+	//dataType 생략 가능
+	$.ajax({
+		url:"/getProductId",
+		type:"post",
+		dataType:"json",
+		success:function(result){
+			console.log("result : " + JSON.stringify(result));
+			console.log("result : " + result.productId);
+			$("#productId").val(result.productId);
+		}
+	});
 });
 </script>
 </head>
@@ -75,11 +85,12 @@ $(function(){
 		<div class="text-right">
 			<a href="?language=ko">Korea</a> | <a href="?language=en">English</a>
 		</div> 
-		<form name="newProduct" action="/addProduct" class="form-horizontal" method="post" enctype="multipart/form-data">
+		<form name="newProduct" action="/addProduct" class="form-horizontal" method="post"
+			enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2"><spring:message code="productId"/></label>
 				<div class="col-sm-3">
-					<input type="text" id="productId" name="productId" class="form-control">
+					<input type="text" id="productId" name="productId" class="form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -130,13 +141,15 @@ $(function(){
 			<div class="form-group row">
 				<label class="col-sm-2"><spring:message code="productImage"/></label>
 				<div class="col-sm-5">
-					<input type="file" id="productImage" name="productImage" class="form-control" multiple />
+					<input type="file" id="productImage" name="productImage" class="form-control"
+						multiple />
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="imgs_wrap">
 				
 				</div>
+			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="button" class="btn btn-primary" value="<spring:message code='button'/>" onclick="checkAddProduct()"/>

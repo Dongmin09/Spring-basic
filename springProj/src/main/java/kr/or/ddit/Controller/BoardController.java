@@ -240,5 +240,11 @@ public class BoardController {
 		
 		return bookVOList;
 	}
+	
+	@RequestMapping("/list")
+	public String list() {
+		//forwarding
+		return "board/list";
+	}
 }
 
