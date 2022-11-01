@@ -1,0 +1,56 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<title>MebmerList</title>
+</head>
+<body>
+<div class="row" >
+	<div class="col-sm-12">
+	<table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+	<thead>
+    	<tr role="row">
+    		<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 59px;">Name</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 65px;">Position</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 50px;">Office</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Age</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69px;">Start date</th><th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 67px;">Salary</th>
+    	</tr>
+    </thead>
+    <tfoot>
+        <tr>
+	        <th rowspan="1" colspan="1">memId</th>
+	        <th rowspan="1" colspan="1">memPass</th>
+	        <th rowspan="1" colspan="1">memName</th>
+	        <th rowspan="1" colspan="1">memRegno1</th>
+	        <th rowspan="1" colspan="1">memRegno2</th>
+	        <th rowspan="1" colspan="1">memZip</th>
+	        <th rowspan="1" colspan="1">memAdd1</th>
+	        <th rowspan="1" colspan="1">memAdd2</th>
+	        <th rowspan="1" colspan="1">memHometel</th>
+	        <th rowspan="1" colspan="1">memComtel</th>
+	        <th rowspan="1" colspan="1">memHp</th>
+	        <th rowspan="1" colspan="1">memMail</th>
+	        <th rowspan="1" colspan="1">memJob</th>
+	        <th rowspan="1" colspan="1">memLike</th>
+	        <th rowspan="1" colspan="1">memMemorial</th>
+	        <th rowspan="1" colspan="1">memMemorialday</th>
+	        <th rowspan="1" colspan="1">memMileage</th>
+	        <th rowspan="1" colspan="1">memDelete</th>
+        </tr>
+    </tfoot>
+    <tbody>
+    <c:forEach var="row" items="${data}" varStatus="stat">
+    <tr class="odd">
+            <td class="sorting_1">${stat.count}</td>
+            <td>${row.memPass}</td>
+            <td>San Francisco</td>
+            <td>36</td>
+            <td>2008/10/16</td>
+            <td>$470,600</td>
+        </tr>
+        </c:forEach>
+        </tbody>
+	</table>
+	</div>
+</div>
+</body>
+</html>

@@ -3,4 +3,10 @@
   <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v8.5 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v8.5 Server at localhost" name="Tomcat v8.5 Server at localhost" runtime-id="Apache Tomcat v8.5" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="120" stop-timeout="15" testEnvironment="true" timestamp="4">
     <list key="modules" value0="springProj::org.eclipse.jst.jee.server:springProj::jst.web::3.1"/>
   </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v8.5 Server at localhost (springProduct)-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v8.5 Server at localhost (springProduct)" name="Tomcat v8.5 Server at localhost (springProduct)" runtime-id="Apache Tomcat v8.5" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="15">
+    <list key="modules" value0="springProduct::org.eclipse.jst.jee.server:springProduct::jst.web::3.1"/>
+  </server>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v8.5 Server at localhost myproduct-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v8.5 Server at localhost myproduct" name="Tomcat v8.5 Server at localhost myproduct" runtime-id="Apache Tomcat v8.5" server-type="org.eclipse.jst.server.tomcat.85" server-type-id="org.eclipse.jst.server.tomcat.85" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="2">
+    <list key="modules" value0="MyspringProduct::org.eclipse.jst.jee.server:MyspringProduct::jst.web::3.1"/>
+  </server>
 </servers>

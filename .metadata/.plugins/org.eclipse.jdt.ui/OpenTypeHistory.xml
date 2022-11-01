@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+<typeInfo handle="=springProj/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;kr.or.ddit.service{MemberService.java[MemberService" modifiers="513" timestamp="1667290862975"/>
+<typeInfo handle="=springProj/C:\/Users\/PC-11\/.m2\/repository\/ognl\/ognl\/2.7.3\/ognl-2.7.3.jar=/maven.pomderived=/true=/=/org.eclipse.jst.component.dependency=/\/WEB-INF\/lib=/=/maven.pomderived=/true=/=/org.eclipse.jst.component.archivename=/ognl-2.7.3.jar=/=/maven.groupId=/ognl=/=/maven.artifactId=/ognl=/=/maven.version=/2.7.3=/=/maven.scope=/compile=/&lt;ognl(MemberAccess.class[MemberAccess" modifiers="1537" timestamp="1666760691713"/>
+<typeInfo handle="=springProj/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;kr.or.ddit.service{CustomerService.java[CustomerService" modifiers="513" timestamp="1667296982020"/>
+</typeInfoHistroy>

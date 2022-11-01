@@ -1,0 +1,134 @@
+package kr.or.ddit.vo;
+
+import java.util.Arrays;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+//자바빈 클래스
+public class MemberVO {
+	
+	//회원 아이디
+	private String userId;
+	//비밀번호
+	private String password; 
+	//보유코인
+	private int coin;
+	//생일(기본 : 2022/11/01 => 변경 20221101 => 변경 2022-11-01
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birth;
+	//성별
+	private String gender;
+	//국적
+	private String nationality;
+	// 보유자동차
+	private String[] cars;
+	// 취미
+	private String[] hobbyList;
+	
+	// 기본생성자
+	public MemberVO() {}
+
+	
+	//getter/setter 메소드
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getCoin() {
+		return coin;
+	}
+
+	public void setCoin(int coin) {
+		this.coin = coin;
+	}
+
+
+	public Date getBirth() {
+		return birth;
+	}
+
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+	public String getNationality() {
+		return nationality;
+	}
+
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+
+	public String[] getCars() {
+		return cars;
+	}
+
+
+	public void setCars(String[] cars) {
+		this.cars = cars;
+	}
+
+
+	public String[] getHobbyList() {
+		return hobbyList;
+	}
+
+
+	public void setHobbyList(String[] hobbyList) {
+		this.hobbyList = hobbyList;
+	}
+
+
+	@Override
+	public String toString() {
+		return "MemberVO [userId=" + userId + ", password=" + password + ", coin=" + coin + ", birth=" + birth
+				+ ", gender=" + gender + ", nationality=" + nationality + ", cars=" + Arrays.toString(cars)
+				+ ", hobbyList=" + Arrays.toString(hobbyList) + "]";
+	}
+
+
+	
+	
+
+
+	
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+}

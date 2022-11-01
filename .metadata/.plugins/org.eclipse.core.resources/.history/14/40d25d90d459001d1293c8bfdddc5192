@@ -1,0 +1,32 @@
+package kr.or.ddit.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.or.ddit.service.CustomerService;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+public class CustomerController {
+
+	@Autowired
+	CustomerService customerService;
+	
+	@RequestMapping(value = "/create",method = RequestMethod.GET)
+	public ModelAndView create() {
+
+		ModelAndView mav = new ModelAndView();
+		
+		//WEB-INF/views/book/create.jsp
+		mav.setViewName("border/create");
+		// forwarding
+		return mav;
+	} 
+
+
+
+}

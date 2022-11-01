@@ -1,0 +1,19 @@
+package kr.or.ddit.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import kr.or.ddit.service.CustomerService;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+public class CustomerController {
+
+	@Autowired
+	CustomerService customerService;
+	
+
+
+
+}

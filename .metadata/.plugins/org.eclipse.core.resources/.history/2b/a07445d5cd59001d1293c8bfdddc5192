@@ -1,0 +1,30 @@
+package kr.or.ddit.dao;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.or.ddit.vo.CustomerVO;
+
+@Repository
+public class CustomerDao {
+
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;
+	
+	// customer 테이블 insert
+	public int insert(CustomerVO customerVO) {
+		
+	}
+	
+	// customer 테이블  목록
+	public List<CustomerVO> list(String keyword){
+		
+	}
+	
+	
+}

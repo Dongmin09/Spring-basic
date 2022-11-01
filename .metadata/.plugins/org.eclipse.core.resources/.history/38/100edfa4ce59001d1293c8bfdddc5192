@@ -1,0 +1,10 @@
+package kr.or.ddit.service;
+
+import kr.or.ddit.vo.CustomerVO;
+
+public interface CustomerService {
+
+	// CUSTOMER 테이블에 INSERT
+	public int insert(CustomerVO customerVO);
+	
+}

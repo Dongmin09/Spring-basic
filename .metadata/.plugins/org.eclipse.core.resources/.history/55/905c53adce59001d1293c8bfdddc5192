@@ -1,0 +1,22 @@
+package kr.or.ddit.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.dao.CustomerDao;
+import kr.or.ddit.service.CustomerService;
+import kr.or.ddit.vo.CustomerVO;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+	
+	@Autowired
+	CustomerDao customerDao;
+	
+	@Override
+	public int insert(CustomerVO customerVO) {
+		// 처리 결과 (0 또는 1)
+		return this.customerDao.insert(customerVO);
+	}
+	
+}

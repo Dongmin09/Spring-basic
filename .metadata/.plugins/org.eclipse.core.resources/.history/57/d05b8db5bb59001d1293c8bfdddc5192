@@ -1,0 +1,35 @@
+package kr.or.ddit.service.impl;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.dao.MemberDao;
+import kr.or.ddit.service.MemberService;
+import kr.or.ddit.vo.CardVO;
+import kr.or.ddit.vo.MemberVO;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+	@Inject
+	MemberDao memberDao;
+	
+	//member 테이블에 insert
+	@Override
+	public int memberInsert(MemberVO memberVO) {
+		//.insert("namespace.id", 파라미터)
+		this.memberDao.memberInsert(memberVO);
+		//address 테이블에 insert
+		this.memberDao.addressInsert(memberVO);
+		// card 테이블에 insert
+		List<cardVO> cardVOList = memberVO.getCardVOList(); 
+		this.memberDao.insertCard(cardVOList);
+		
+	}
+	
+
+	
+
+}

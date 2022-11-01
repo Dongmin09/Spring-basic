@@ -1,0 +1,7 @@
+package kr.or.ddit.service.impl;
+
+import kr.or.ddit.service.MemberService1;
+
+public class MemberServiceImpl1 implements MemberService1 {
+
+}

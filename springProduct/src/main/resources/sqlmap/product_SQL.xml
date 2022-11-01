@@ -3,16 +3,15 @@
 <mapper namespace="product">
 	<!-- PRODUCT 테이블에 insert -->
 	<insert id="insert" parameterType="productVO">
-		<!-- BEFORE : insert 문을 실행하기 전에 수행  
-			AFTER : insert 문을 실행한 후에 수행  
-		-->
-		
-		<selectKey order="BEFORE" keyProperty="productId" resultType="String">
-	       SELECT SUBSTR(MAX(PRODUCT_ID),0,1)
-           || TRIM((SUBSTR(MAX(PRODUCT_ID),2)+1)) PRODUCT_ID
-     	   FROM   PRODUCT
+		<!-- BEFORE : insert 문을 실행하기전에 수행
+			AFTER : insert 문을 실행한 후에 수행
+		 -->
+		<selectKey order="BEFORE" keyProperty="productId"
+			 resultType="String">
+			SELECT SUBSTR(MAX(PRODUCT_ID),0,1)
+			     || TRIM((SUBSTR(MAX(PRODUCT_ID),2)+1))
+			FROM   PRODUCT
 		</selectKey>
-	
 		INSERT INTO PRODUCT(
 			  PRODUCT_ID
 			, PNAME
@@ -33,20 +32,20 @@
 			)
 	</insert>
 	
-<!-- 상품 목록 -->
-    <select id="list" parameterType="String" resultType="productVO">
-       SELECT P.PRODUCT_ID, P.PNAME, P.UNIT_PRICE, P.DESCRIPTION, P.MANUFACTURER
-         , P.CATEGORY, P.UNIT_IN_STOCK, P.CONDITION, (SELECT A.ATTACH_NAME FROM ATTACH A
-              WHERE  P.PRODUCT_ID = A.TID
-              AND    A.SEQ = 1) FILENAME
-      FROM PRODUCT P
-      WHERE 1= 1
-   <if test="keyWord!=null and keyWord!=''">
-      AND (P.PNAME LIKE '%' || #{keyWord} || '%'
-      OR P.CATEGORY LIKE '%' || #{keyWord} || '%')
-   </if>
-      ORDER BY P.PRODUCT_ID DESC
-    </select>
+	<!-- 상품 목록 -->
+ 	<select id="list" parameterType="String" resultType="productVO">
+ 		SELECT P.PRODUCT_ID, P.PNAME, P.UNIT_PRICE, P.DESCRIPTION, P.MANUFACTURER
+			, P.CATEGORY, P.UNIT_IN_STOCK, P.CONDITION, (SELECT A.ATTACH_NAME FROM ATTACH A
+		        WHERE  P.PRODUCT_ID = A.TID
+		        AND    A.SEQ = 1) FILENAME
+		FROM PRODUCT P
+		WHERE 1= 1
+	<if test="keyWord!=null and keyWord!=''">
+		AND (P.PNAME LIKE '%' || #{keyWord} || '%'
+		OR P.CATEGORY LIKE '%' || #{keyWord} || '%')
+	</if>
+		ORDER BY P.PRODUCT_ID DESC
+ 	</select>
 	
 	<!-- 
 	ProductVO [productId=P1236, pname=null, unitPrice=0, description=null, 
@@ -119,15 +118,21 @@
 	 	</foreach>
 	 </update>
 	 
-	<!-- PRODUCT테이블의 기본키 자동 생성 -->
-    <select id="getProductId" resultType="String">
-       SELECT SUBSTR(MAX(PRODUCT_ID),0,1)
-           || TRIM((SUBSTR(MAX(PRODUCT_ID),2)+1)) PRODUCT_ID
-      FROM   PRODUCT
-    </select>
-	 
-	 
+	 <!-- PRODUCT테이블의 기본키 자동 생성 -->
+	 <select id="getProductId" resultType="String">
+	 	SELECT SUBSTR(MAX(PRODUCT_ID),0,1)
+		     || TRIM((SUBSTR(MAX(PRODUCT_ID),2)+1)) PRODUCT_ID
+		FROM   PRODUCT
+	 </select>
 </mapper>
+
+
+
+
+
+
+
+
 
 
 

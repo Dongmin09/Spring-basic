@@ -1,0 +1,10 @@
+package kr.or.ddit.vo;
+
+import java.util.Date;
+
+// 자바빈 클래스
+public class CardVO {
+	
+	private String no;
+	private Date validMonth;
+}

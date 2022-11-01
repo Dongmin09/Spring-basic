@@ -1,0 +1,18 @@
+package kr.or.ddit.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import kr.or.ddit.dao.MemberDao1;
+import kr.or.ddit.service.MemberService1;
+
+public class MemberServiceImpl1 implements MemberService1 {
+	
+	@Autowired
+	MemberDao1 memberDao1;
+	
+	@Override
+	public List<member1VO> list(String keyword){
+		return this.memberDao1.list(keyword);
+	}
+	
+}
