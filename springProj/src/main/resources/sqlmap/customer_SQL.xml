@@ -6,28 +6,46 @@
 	이를 구별하기 위한 식별 용도로 사용
 	  -->
 <mapper namespace="customer">
+	
+	<sql id="where">
+		<!-- 통합 검색 -->
+	    AND (CUM_ID LIKE '%' || #{keyword} || '%' 
+	    OR CUM_NAME LIKE '%' || #{keyword} || '%' 
+	    OR CUM_JOB LIKE '%'  || #{keyword} || '%' 
+	    OR CUM_LIKE LIKE '%' || #{keyword} || '%' 
+	    OR CUM_SKIL LIKE '%' || #{keyword} || '%')
+	</sql>
+
+
+
 	 <!-- customer 테이블에 insert  -->
-	<insert id="insert" parameterType="kr.or.ddit.vo.CustomerVO">
-		<selectKey order="BEFORE" resultType="integer" keyProperty="cumId">
-			SELECT NVL(MAX(CUM_ID),0) +1 FROM CUSTOMER
-		</selectKey>
-		
+ 	<insert id="create" parameterType="kr.or.ddit.vo.CustomerVO">
 		INSERT INTO CUSTOMER (CUM_ID,CUM_NAME,CUM_JOB,CUM_LIKE,CUM_SKIL) 
-		VALUES ('a001','김은대','주부','수영','요리')
 		VALUES(#{cumId},#{cumName},#{cumJob},#{cumLike},#{cumSkil})
-	</insert>
+	</insert> 
 	
 	<!-- customer list  -->
-	<select id="list" resultType="customerVO" parameterType="String">
-		SELECT CUM_ID,CUM_NAME,CUM_JOB,CUM_LIKE,CUM_SKIL
-		FROM CUSTOMER
+	<select id="list" resultType="customerVO" parameterType="hashMap">
+		WITH T AS(
+		SELECT ROW_NUMBER() OVER (ORDER BY CUM_ID ASC) RNUM,
+		CUM_ID,CUM_NAME,CUM_JOB,CUM_LIKE,CUM_SKIL
+		FROM CUSTOMER 
 		WHERE 1 = 1
-		<if test="keyWord!=null and keyWord!=''">
-		AND (CUM_NAME LIKE '%' || #{keyWord} || '%' 
-		OR 	CUM_ID LIKE '%' || #{keyWord} || '%')
+		<if test="keyword!=null and keyword!=''">
+			<include refid="where"></include>
 		</if>
-		ORDER BY INSERT_DATE DESC
+		)
+		SELECT * FROM T
+		WHERE T.RNUM BETWEEN #{currentPage}* #{show} -(#{show}-1) AND #{currentPage} * #{show}
 	</select>
 	
+	<!-- CUSTOMER 테이블의 전체 행 수 구함 -->
+	<select id="getTotal" resultType="int" parameterType="hashMap">
+		SELECT COUNT(*) FROM CUSTOMER
+		WHERE 1 = 1
+		<if test="keyword!=null and keyword!=''">
+			<include refid="where"></include>
+		</if>
+	</select>
 	
 </mapper>
