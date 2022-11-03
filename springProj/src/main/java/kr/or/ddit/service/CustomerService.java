@@ -19,6 +19,9 @@ public interface CustomerService {
 
 	// CUSTOMER 테이블의 전체 행 수 구함 
 	public int getTotal(Map<String,String> map);
+
+	// 아이디 중복 체크
+	public int chkDup(String cumId);
 	
 	
 	

@@ -35,6 +35,7 @@ public class MemberVO {
 	private AddressVO addressVO;
 	//중접된 자바빈(1:N)
 	private List<CardVO> cardVOList;
+	
 
 	
 	// 기본생성자

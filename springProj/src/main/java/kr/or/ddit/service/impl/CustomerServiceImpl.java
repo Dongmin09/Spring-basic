@@ -3,11 +3,15 @@ package kr.or.ddit.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.dao.CustomerDao;
 import kr.or.ddit.service.CustomerService;
+import kr.or.ddit.util.FileUploadUtil;
 import kr.or.ddit.vo.AttachVO;
 import kr.or.ddit.vo.CustomerVO;
 
@@ -17,11 +21,21 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	CustomerDao customerDao;
 	
+	@Inject
+	FileUploadUtil fileUploadUtil;
+	
 	// customer 테이블 insert
+	@Transactional
 	@Override
 	public int insert(CustomerVO customerVO) {
 		// 처리 결과 (0 또는 1)
-		return this.customerDao.insert(customerVO);
+		//customer 테이블에 insert
+		this.customerDao.insert(customerVO);
+		
+		//FileUploadUtil활용 -> 업로드, ATTACH 테이블 에 insert
+		return this.fileUploadUtil.fileUploadAction(
+				customerVO.getPictureArray(),
+				customerVO.getCumId());
 	}
 	
 	// customer 테이블 list
@@ -40,6 +54,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public int getTotal(Map<String,String> map) {
 		return this.customerDao.getTotal(map);
+	}
+	
+	// 아이디 ㅣ중복체크
+	@Override
+	public int chkDup(String cumId) {
+		return this.customerDao.chkDup(cumId);
 	}
 	
 }

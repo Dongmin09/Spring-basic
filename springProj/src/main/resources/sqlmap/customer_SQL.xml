@@ -48,4 +48,10 @@
 		</if>
 	</select>
 	
+	<!-- 아이디 중복 체크  -->
+	<!-- parameterType은 String, hashMap, customerVO  -->
+	<select id="chkDup" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM CUSTOMER WHERE CUM_ID = #{cumId}
+	
+	</select>
 </mapper>

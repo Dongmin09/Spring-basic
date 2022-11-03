@@ -36,4 +36,9 @@ public class CustomerDao {
 	public int getTotal(Map<String,String> map) {
 		return this.sqlSessionTemplate.selectOne("customer.getTotal", map);
 	}
+	
+	// 아이디 ㅣ중복체크
+	public int chkDup(String cumId) {
+		return this.sqlSessionTemplate.selectOne("customer.chkDup", cumId);
+	}
 }
