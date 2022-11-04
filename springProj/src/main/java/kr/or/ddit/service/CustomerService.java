@@ -22,6 +22,9 @@ public interface CustomerService {
 
 	// 아이디 중복 체크
 	public int chkDup(String cumId);
+
+	// 상세보기
+	public CustomerVO detail(String cumId);
 	
 	
 	

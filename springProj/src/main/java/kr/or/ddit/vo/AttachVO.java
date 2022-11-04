@@ -1,6 +1,7 @@
 package kr.or.ddit.vo;
 
 import java.util.Date;
+import java.util.List;
 //자바빈 클래스
 public class AttachVO {
 	//멤버변수
@@ -10,6 +11,8 @@ public class AttachVO {
 	private int attachSize;
 	private String attachType;
 	private Date registDate;
+	
+	
 	
 	//기본생성자
 	public AttachVO() {}
@@ -52,11 +55,14 @@ public class AttachVO {
 		this.registDate = registDate;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "AttachVO [seq=" + seq + ", tid=" + tid + ", attachName=" + attachName + ", attachSize=" + attachSize
-				+ ", attachType=" + attachType + ", registDate=" + registDate + "]";
+				+ ", attachType=" + attachType + ", registDate=" + registDate + ", attachVOList=" + "]";
 	}
+
 	
 	
 }

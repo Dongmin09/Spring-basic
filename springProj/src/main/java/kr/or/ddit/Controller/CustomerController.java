@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.ddit.service.CustomerService;
 import kr.or.ddit.util.ArticlePage;
 import kr.or.ddit.util.FileUploadUtil;
+import kr.or.ddit.vo.AttachVO;
 import kr.or.ddit.vo.CustomerVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -304,6 +306,31 @@ public class CustomerController {
 		return entity;
 	}
 	
+	
+	//요청URL : /board/detail?cumId=a001
+	//URL : /board/detail
+	//요청 파라미터 : cumId=a001
+	@GetMapping("/board/detail")
+	public String detail(String cumId, Model model) {
+		log.info("cumId :" + cumId);
+		
+		
+		//회원 상세 정보(1)
+		CustomerVO customerVO = this.customerService.detail(cumId);
+		
+		
+		// 회원 증명사진(N)
+		List<AttachVO> attachVOList = customerVO.getAttachVOList();
+		
+		
+		log.info("customerVO : " + customerVO);
+		
+		model.addAttribute("customerVO", customerVO);
+		model.addAttribute("attachVOList", attachVOList);
+		//forwarding
+		return "board/detail";
+		
+	}
 	
 	
 

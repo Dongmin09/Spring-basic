@@ -110,7 +110,7 @@ $(function(){
 									<tr class="odd">
 								</c:if>
 									<td class="sorting_1">${row.cumId}</td>
-									<td>${row.cumName}</td>
+									<td><a href="/board/detail?cumId=${row.cumId}">${row.cumName}</td>
 									<td>${row.cumJob}</td>
 									<td>${row.cumLike}</td>
 									<td>${row.cumSkil}</td>
