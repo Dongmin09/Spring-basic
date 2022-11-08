@@ -96,6 +96,30 @@ public class MemServiceImpl implements MemService {
 		return this.memMapper.memList2();
 	}
 	
+	// 새로운 회원상세
+	@Override
+	public MemVO memDetail(String userNo) {
+		return this.memMapper.memDetail(userNo);
+	}
+	
+   // 새로운 비밀번호 체크
+	@Override
+   public int detailPwCheck(MemVO memVO) {
+	   return this.memMapper.detailPwCheck(memVO);
+   }
+	
+   // 새로운 회원정보 변경
+	@Override
+   public int memUpdate(MemVO memVO) {
+	   return this.memMapper.memUpdate(memVO);
+   }
+	
+   // 새로운 회원정보 삭제
+	@Override
+   public int memDelete(String userNo) {
+	   return this.memMapper.memDelete(userNo);
+   }
+
 	
 }
 

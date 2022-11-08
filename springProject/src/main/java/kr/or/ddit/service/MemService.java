@@ -23,4 +23,16 @@ public interface MemService {
 	
 	// 새로운MEM 테이블 LIST 
 	public List<MemVO> memList2();
+	
+	// 새로운 회원상세
+	public MemVO memDetail(String userNo);
+	
+	// 새로운 비밀번호 체크
+	public int detailPwCheck(MemVO memVO);
+	
+	// 새로운 회원정보 변경
+	public int memUpdate(MemVO memVO);
+	
+	// 새로우 회원정보 삭제
+	public int memDelete(String userNo);
 }

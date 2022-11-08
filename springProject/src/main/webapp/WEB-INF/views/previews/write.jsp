@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="/resources/js/jquery-3.6.0.js"></script>
@@ -7,38 +7,45 @@ $(function(){
    
 });
 </script>
-
 <script type="text/javascript">
 function fn_chk(){
    let userPw = document.getElementById("userPw").value;
    let userPwCheck = document.getElementById("userPwCheck").value;
+   // 비밀번호가 다를 떄 보여주는 멘트 영역
+   let spanPwCheck = document.getElementById("spanPwCheck");
    
-   console.log("userPw : " + userPw + ", userPwCheck : "  + userPwCheck);
+   console.log("userPw : " + userPw + " | userPwCheck : " + userPwCheck);
    
-   if(userPw != userPwCheck){
-      spanPwCheck.innerHTML="비밀번호가 다릅니다.";
+   if(userPw == userPwCheck){
+      return true;
+   } else {
+      spanPwCheck.innerHTML = "비밀번호가 다릅니다.";
       return false;
    }
-   
-   return true;
 }
-</script>
 
-<script type="text/javascript">
-function attachAdd(){
-	let file = attachVOList[0].filename;
-	let files = document.getElementById("attachVOList[0].filename").value;
-	console.log("document.getElementById('ffile').value");
-	alert("dhktek");
-}
-	
-
-
-
-
-function attachDel(){
-   alert("del");
-}
+$(function(){
+      //전역변수[0][1]..
+      var count=1; //let으로도 많이 씀
+      $('#plusBtn').on('click', function(){
+         count++;   //2
+         event.preventDefault();
+         var hs = $("div#att");
+           
+         hs.append('<div class="form-group ab" id="attach'+ count + '"><input id="attachVOList' + count + '.filename" name="attachVOList[' + count + '].filename" placeholder="첨부파일" class="form-control form-control-user" type="text"></div>');
+      });
+      
+      $('#minusBtn').on('click', function(){
+         event.preventDefault();
+         var ab = document.querySelectorAll('.ab');
+         console.log(ab);
+         
+         if(count>0){
+            $('.ab:last').remove();
+            count--;
+         }
+      });
+   });
 </script>
 <div class="container">
 
@@ -56,92 +63,80 @@ function attachDel(){
                      action="/previews/writePost" onsubmit="return fn_chk()">
                      <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                           <!-- input type="text" -> form:input -->
-                           <!-- id="userId" name="userId" ->  path="userId"-->
+                           <!-- id="userId" name="userId" -> path="userId" -->
                            <form:input class="form-control form-control-user"
                               path="userId" placeholder="userId" />
-                           <font color="red"> 
-                              <form:errors path="userId" />
+                           <font color="red"> <form:errors path="userId" />
                            </font>
                         </div>
                         <div class="col-sm-6">
                            <form:input class="form-control form-control-user"
                               path="userName" placeholder="userName" />
-                           <font color="red"> 
-                              <form:errors path="userName" />
-                           </font>
                         </div>
+                        <font color="red"> <form:errors path="userName" />
+                        </font>
                      </div>
                      <div class="form-group">
                         <form:input class="form-control form-control-user"
-                           path="userEmail" placeholder="Email Address" />
-                        <font color="red"> 
-                           <form:errors path="userEmail" />
-                        </font>
+                           path="userEmail" placeholder="userEmail" />
                      </div>
-                     <div class="form-group" >
+                     <font color="red"> <form:errors path="userEmail" />
+                     </font>
+                     <div class="form-group">
                         <form:input class="form-control form-control-user"
                            path="updDate" placeholder="변경일자(yyyyMMdd)" />
-                        <font color="red"> 
-                           <form:errors path="updDate" />
-                        </font>
                      </div>
-<%--                      <c:forEach var="attachVOList" items="${attachVOList[i]}" varStatus="stat"> --%>
-<%--                      <c:forEach var="attachVOList[i]" begin="0" end="attachVOList.length" step="1"> --%>
-                  
-                     <div class="form-group">
-                     <!-- attachVOList : List<ATtachVO>
-                         attachVOList[0] : AttachVO
-                      -->
-                        <form:input class="form-control form-control-user" id="ffile"
-                           path="attachVOList[0].filename" placeholder="첨부파일명" />
-                        
-                        <font color="red"> 
-                           <form:errors path="attachVOList[0].filename" />
-                        </font>
-                                       <!-- 첨부파일 추가 -->
-	                     <button type="button" class="btn btn-success btn-circle btn-sm" onclick="attachAdd()">
-	                               <i class="fas fa-check"></i>
-	                     </button>
-	                            <!-- 첨부파일 제거 -->
-	                     <button type="button" class="btn btn-danger btn-circle btn-sm" onclick="attachDel()">
-	                               <i class="fas fa-trash"></i>
-	                      </button>
-                     </div>
-                  
-                     <div class="form-group">
-                     <!-- attachVOList : List<ATtachVO>
-                         attachVOList[0] : AttachVO
-                      -->
-                        <form:input class="form-control form-control-user"
-                           path="attachVOList[1].filename" placeholder="첨부파일명" />
-                        <font color="red"> 
-                           <form:errors path="attachVOList[1].filename" />
-                        </font>
-                     </div>
-<%--                      </c:forEach> --%>
+                     <font color="red"> <form:errors path="updDate" />
+                     </font>
+                     <input type="button" class="btn btn-success btn-circle btn-sm" name="plusBtn" id="plusBtn" value="+" />
+                            <input type="button" class="btn btn-danger btn-circle btn-sm" name="minusBtn" id="minusBtn" value="-" />
+                               
+                               <div id="att">
+                           <div class="form-group ab">
+                              <!-- attachVOList     : List<AttachVO>
+                                  attachVOList[0] : AttachVO  -->
+                              <form:input class="form-control form-control-user"
+                                 path="attachVOList[0].filename" placeholder="첨부파일명1" />
+                           </div>
+                           <font color="red"> <form:errors path="attachVOList[0].filename" />
+                           </font>
+                           
+                           <div class="form-group ab">
+                              <!-- attachVOList     : List<AttachVO>
+                                  attachVOList[0] : AttachVO  -->
+                              <form:input class="form-control form-control-user"
+                                 path="attachVOList[1].filename" placeholder="첨부파일명2" />
+                           </div>
+                           <font color="red"> <form:errors path="attachVOList[1].filename" />
+                           </font>
+                        </div>
+                     
                      <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                           <!-- input type="password" -> form:password-->
+                           <!-- input type="password -> form:password -->
                            <form:password class="form-control form-control-user"
                               path="userPw" placeholder="Password" />
-                           <font color="red"> 
-                              <form:errors path="userPw" />
-                           </font>
                         </div>
+                        <font color="red"> <form:errors path="userPw" />
+                        </font>
                         <div class="col-sm-6">
                            <input type="password" class="form-control form-control-user"
-                              id="userPwCheck" placeholder="Repeat Password">
-                           <font color="red"> 
-                              <span id="spanPwCheck"></span>
-                           </font>
+                              id="userPwCheck" placeholder="Repeat Password" />
                         </div>
+                        <font color="red">
+                           <span id="spanPwCheck" ></span>
+                        </font>
                      </div>
                      <input type="submit" class="btn btn-primary btn-user btn-block"
                         value="Register Account" />
-                     <hr>
                   </form:form>
-               <p /><p /><p /><p /><p /><p /><br /><br /><br /><br />
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                  <p></p>
                </div>
             </div>
          </div>
