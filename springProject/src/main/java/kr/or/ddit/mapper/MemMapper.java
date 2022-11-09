@@ -51,6 +51,9 @@ public interface MemMapper {
    // 새로운 회원정보 삭제
    public int memDelete(String userNo);
    
+   //쌤풀이
+  // public int memDelete(MemVO memVO);
+   
    
 }
 

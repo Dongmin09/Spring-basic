@@ -35,4 +35,7 @@ public interface MemService {
 	
 	// 새로우 회원정보 삭제
 	public int memDelete(String userNo);
+	
+	// 선생님풀이
+	//public int memDelete(int userNo);
 }

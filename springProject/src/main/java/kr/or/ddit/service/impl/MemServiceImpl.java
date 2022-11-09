@@ -119,6 +119,13 @@ public class MemServiceImpl implements MemService {
    public int memDelete(String userNo) {
 	   return this.memMapper.memDelete(userNo);
    }
+	
+	/*
+	 * //쌤풀이
+	 * 
+	 * @Override public int memDelete(int userNO) { return
+	 * this.memMapper.memDelete(userNo); }
+	 */
 
 	
 }

@@ -163,7 +163,9 @@ public class PreviewsController {
 	}
 	
 	// 회원정보삭제
-	
+	// 요청uri:/previews/deletePost
+	// 요청 파라미터 memVO
+	// 방식 post
 	@PostMapping("/deletePost")
 	public String memDelete(@RequestParam String userNo) {
 		
@@ -173,5 +175,14 @@ public class PreviewsController {
 		
 		return "redirect:/previews/list";
 	}
+	
+	// 쌤풀이
+	/*@PostMapping("/deletePost")
+	 * public String deletePost(@ModelAttribute MemVO memVO) {
+	 * 
+	 * //userNo를 기본키로하여 MEM테이블의 데이터를 삭제 
+	 * int result = this.memService.memDelete(memVO.getUserNo()); //redirect return
+	 * "redirect:/previews/list"; }
+	 */
 }
 

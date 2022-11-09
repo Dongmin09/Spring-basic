@@ -244,7 +244,7 @@
    </update>
    
    <!-- 회원정보삭제  -->
-   <delete id="memDelete" parameterType="String" >
+   <delete id="memDelete" parameterType="int" >
 	   	DELETE FROM MEM
 		WHERE USER_ID = #{userNo}
    </delete>
